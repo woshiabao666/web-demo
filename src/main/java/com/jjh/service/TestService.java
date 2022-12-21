@@ -1,5 +1,10 @@
 package com.jjh.service;
 
+import com.github.pagehelper.PageInfo;
+
+import java.util.List;
+import java.util.Map;
+
 /**
  * @description:
  * @author: jay
@@ -7,6 +12,6 @@ package com.jjh.service;
  */
 public interface TestService {
 
-    public String getMessage();
+    public PageInfo<Map<String,Object>> getMessage(Integer pageNum, Integer pageSize);
 
 }

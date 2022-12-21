@@ -3,6 +3,9 @@ package com.jjh.mapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * @description:
  * @author: jay
@@ -10,5 +13,5 @@ import org.springframework.stereotype.Repository;
  */
 
 public interface TestDao {
-    public String getAll();
+    List<Map<String,Object>> getAll();
 }

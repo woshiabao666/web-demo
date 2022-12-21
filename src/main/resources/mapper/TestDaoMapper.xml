@@ -3,7 +3,14 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jjh.mapper.TestDao">
-    <select id="getAll" resultType="java.lang.String">
-        select account from customer where id = 1
+    <select id="getAll" resultType="HashMap">
+        SELECT
+            emp.hire_date hireDate,
+            emp.last_name lastName,
+            emp.email email,
+            emp.salary salary,
+            emp.job_id jobId
+        FROM
+            employees emp
     </select>
 </mapper>
