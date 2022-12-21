@@ -40,18 +40,13 @@
             </el-table-column>
             <el-table-column
                     prop="salary"
-                    label="市区"
+                    label="薪水"
                     width="120">
             </el-table-column>
             <el-table-column
                     prop="jobId"
                     label="地址"
-                    width="400">
-            </el-table-column>
-            <el-table-column
-                    prop="zip"
-                    label="邮编"
-                    width="120">
+                    width="1200">
             </el-table-column>
             <el-table-column
                     fixed="right"
@@ -67,11 +62,12 @@
 
 
         <el-footer>
-
             <el-pagination
-                    background
+                    :page-size=pageInfo.pageSize
                     layout="prev, pager, next"
-                    :total="100">
+                    :total=pageInfo.total
+                    @current-change="handleCurrentChange"
+            >
             </el-pagination>
 
         </el-footer>
@@ -79,7 +75,6 @@
 
 </div>
 </body>
-
 
 
 <script>
@@ -96,7 +91,7 @@
             }],
             pageInfo: {
                 pageNum: 1,
-                pageSize: 20,
+                pageSize: 10,
                 total: 0
             }
         },
@@ -118,8 +113,16 @@
                 },function (err) {
                     console.log(err)
                 })
+            },
+            handleCurrentChange(val){
+                valueObj.pageInfo.pageNum = val;
+                this.getMessage();
+            },
+            handleClick(val){
+
             }
         },
+
         computed:{
 
         }
