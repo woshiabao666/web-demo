@@ -54,10 +54,36 @@
                     width="100">
                 <template slot-scope="scope">
                     <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
-                    <el-button type="text" size="small">编辑</el-button>
+                    <el-button @click="handleClick(scope.row)" type="text" size="small">编辑</el-button>
                 </template>
             </el-table-column>
         </el-table>
+
+        <el-dialog title="编辑" :visible.sync="dialogFormVisible">
+            <el-form :model="form">
+                <el-form-item label="日期" :label-width="formLabelWidth">
+                    <el-input v-model="form.hireDate" autocomplete="off"></el-input>
+                </el-form-item>
+
+                <el-form-item label="姓名" :label-width="formLabelWidth">
+                    <el-input v-model="form.lastName" autocomplete="off"></el-input>
+                </el-form-item>
+
+                <el-form-item label="省份" :label-width="formLabelWidth">
+                    <el-input v-model="form.salary" autocomplete="off"></el-input>
+                </el-form-item>
+
+                <el-form-item label="地址" :label-width="formLabelWidth">
+                    <el-input v-model="form.email" autocomplete="off"></el-input>
+                </el-form-item>
+                </el-form-item>
+            </el-form>
+            <div slot="footer" class="dialog-footer">
+                <el-button @click="dialogFormVisible = false">取 消</el-button>
+                <el-button type="primary" @click="saveData">确 定</el-button>
+            </div>
+        </el-dialog>
+
     </template>
 
 
@@ -93,7 +119,16 @@
                 pageNum: 1,
                 pageSize: 10,
                 total: 0
-            }
+            },
+            dialogFormVisible: false,
+            form: {
+                hireDate:"s",
+                lastName: "s",
+                province: "s",
+                salary: "s",
+                email: "s"
+            },
+            formLabelWidth: '100px'
         },
         methods:{
             getMessage:function () {
@@ -109,8 +144,20 @@
                     valueObj.pageInfo.pageNum = resp.data.pageNum;
                     valueObj.pageInfo.pageSize = resp.data.pageSize
 
-
                 },function (err) {
+                    console.log(err)
+                })
+            },
+
+            saveMessage:function (){
+                axios.get("http://localhost:8089/saveData",{
+                    params: {
+                        lastName:valueObj.form.lastName,
+                        email:valueObj.form.email
+                    }
+                }).then(function (resp){
+                    console.log(resp)
+                },function (err){
                     console.log(err)
                 })
             },
@@ -119,7 +166,17 @@
                 this.getMessage();
             },
             handleClick(val){
-
+                valueObj.dialogFormVisible = true
+                console.log("val:",val)
+                valueObj.form.lastName = val.lastName
+                valueObj.form.email = val.email
+                valueObj.form.hireDate = val.jobId
+                valueObj.form.salary = val.salary
+            },
+            saveData(){
+                valueObj.dialogFormVisible = false
+                console.log("form",valueObj.form)
+                this.saveMessage()
             }
         },
 
