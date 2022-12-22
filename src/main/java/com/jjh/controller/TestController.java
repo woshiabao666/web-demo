@@ -29,8 +29,10 @@ public class TestController {
     @RequestMapping("/demo01")
     @ResponseBody
     public PageInfo<Map<String, Object>> demo01(@RequestParam(value = "pageNum") Integer pageNum,
-                           @RequestParam(value = "pageSize") Integer pageSize) {
-        PageInfo<Map<String, Object>> pageInfo = testService.getMessage(pageNum, pageSize);
+                                                @RequestParam(value = "pageSize") Integer pageSize,
+                                                @RequestParam(value = "lastName",defaultValue = "") String lastName
+    ) {
+        PageInfo<Map<String, Object>> pageInfo = testService.getMessage(pageNum, pageSize,lastName);
 //        List<Map<String, Object>> message = testService.getMessage(pageNum,pageSize);
 //        Object[] objects = pageInfo.getList().toArray();
         return pageInfo;

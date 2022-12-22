@@ -13,5 +13,7 @@ import java.util.Map;
  */
 
 public interface TestDao {
-    List<Map<String,Object>> getAll();
+
+    @SuppressWarnings("MybatisXMapperMethodInspection")
+    List<Map<String,Object>> getAll(String name);
 }

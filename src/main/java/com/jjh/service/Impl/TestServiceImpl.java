@@ -32,9 +32,9 @@ public class TestServiceImpl implements TestService {
 
 
     @Override
-    public PageInfo<Map<String,Object>> getMessage(Integer pageNum, Integer pageSize) {
+    public PageInfo<Map<String,Object>> getMessage(Integer pageNum, Integer pageSize,String name) {
         PageHelper.startPage(pageNum, pageSize);
-        List<Map<String,Object>> result = testDao.getAll();
+        List<Map<String,Object>> result = testDao.getAll(name);
 
         Person person = new Person();
         person.setData(result);

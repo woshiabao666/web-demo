@@ -14,77 +14,92 @@
 </head>
 <body>
 <div id = "app" style="height: 100%">
-    <div>
-        <button @click="getMessage">查询</button>
-    </div>
-    <template>
-        <el-table
-                :data="tableData"
-                border
-                style="width: 100%">
-            <el-table-column
-                    fixed
-                    prop="hireDate"
-                    label="日期"
-                    width="150">
-            </el-table-column>
-            <el-table-column
-                    prop="lastName"
-                    label="姓名"
-                    width="120">
-            </el-table-column>
-            <el-table-column
-                    prop="email"
-                    label="省份"
-                    width="120">
-            </el-table-column>
-            <el-table-column
-                    prop="salary"
-                    label="薪水"
-                    width="120">
-            </el-table-column>
-            <el-table-column
-                    prop="jobId"
-                    label="地址"
-                    width="1200">
-            </el-table-column>
-            <el-table-column
-                    fixed="right"
-                    label="操作"
-                    width="100">
-                <template slot-scope="scope">
-                    <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
-                    <el-button @click="handleClick(scope.row)" type="text" size="small">编辑</el-button>
-                </template>
-            </el-table-column>
-        </el-table>
 
-        <el-dialog title="编辑" :visible.sync="dialogFormVisible">
-            <el-form :model="form">
-                <el-form-item label="日期" :label-width="formLabelWidth">
-                    <el-input v-model="form.hireDate" autocomplete="off"></el-input>
-                </el-form-item>
 
-                <el-form-item label="姓名" :label-width="formLabelWidth">
-                    <el-input v-model="form.lastName" autocomplete="off"></el-input>
-                </el-form-item>
+<!--        <div>-->
+<!--            <button @click="getMessage">查询</button>-->
+<!--        </div>-->
 
-                <el-form-item label="省份" :label-width="formLabelWidth">
-                    <el-input v-model="form.salary" autocomplete="off"></el-input>
-                </el-form-item>
+    <el-form :inline="true" :model="formInline" class="demo-form-inline">
+        <el-form-item label="姓名">
+            <el-input v-model="formInline.lastName" placeholder="请输入姓名"></el-input>
+        </el-form-item>
+        <el-form-item>
+            <el-button type="primary" @click="getMessage">查询</el-button>
+        </el-form-item>
+    </el-form>
 
-                <el-form-item label="地址" :label-width="formLabelWidth">
-                    <el-input v-model="form.email" autocomplete="off"></el-input>
-                </el-form-item>
-                </el-form-item>
-            </el-form>
-            <div slot="footer" class="dialog-footer">
-                <el-button @click="dialogFormVisible = false">取 消</el-button>
-                <el-button type="primary" @click="saveData">确 定</el-button>
-            </div>
-        </el-dialog>
 
-    </template>
+        <template>
+            <el-table
+                    :data="tableData"
+                    border
+                    style="width: 100%">
+                <el-table-column
+                        fixed
+                        prop="hireDate"
+                        label="日期"
+                        width="150">
+                </el-table-column>
+                <el-table-column
+                        prop="lastName"
+                        label="姓名"
+                        width="120">
+                </el-table-column>
+                <el-table-column
+                        prop="email"
+                        label="省份"
+                        width="120">
+                </el-table-column>
+                <el-table-column
+                        prop="salary"
+                        label="薪水"
+                        width="120">
+                </el-table-column>
+                <el-table-column
+                        prop="jobId"
+                        label="地址"
+                        width="1200">
+                </el-table-column>
+                <el-table-column
+                        fixed="right"
+                        label="操作"
+                        width="100">
+                    <template slot-scope="scope">
+                        <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
+                        <el-button @click="handleClick(scope.row)" type="text" size="small">编辑</el-button>
+                    </template>
+                </el-table-column>
+            </el-table>
+
+            <el-dialog title="编辑" :visible.sync="dialogFormVisible">
+                <el-form :model="form">
+                    <el-form-item label="日期" :label-width="formLabelWidth">
+                        <el-input v-model="form.hireDate" autocomplete="off"></el-input>
+                    </el-form-item>
+
+                    <el-form-item label="姓名" :label-width="formLabelWidth">
+                        <el-input v-model="form.lastName" autocomplete="off"></el-input>
+                    </el-form-item>
+
+                    <el-form-item label="省份" :label-width="formLabelWidth">
+                        <el-input v-model="form.salary" autocomplete="off"></el-input>
+                    </el-form-item>
+
+                    <el-form-item label="地址" :label-width="formLabelWidth">
+                        <el-input v-model="form.email" autocomplete="off"></el-input>
+                    </el-form-item>
+                    </el-form-item>
+                </el-form>
+                <div slot="footer" class="dialog-footer">
+                    <el-button @click="dialogFormVisible = false">取 消</el-button>
+                    <el-button type="primary" @click="saveData">确 定</el-button>
+                </div>
+            </el-dialog>
+
+        </template>
+
+
 
 
         <el-footer>
@@ -122,20 +137,25 @@
             },
             dialogFormVisible: false,
             form: {
-                hireDate:"s",
-                lastName: "s",
-                province: "s",
-                salary: "s",
-                email: "s"
+                hireDate:"",
+                lastName: "",
+                province: "",
+                salary: "",
+                email: ""
             },
-            formLabelWidth: '100px'
+            formLabelWidth: '100px',
+            formInline: {
+                lastName: '',
+                region: ''
+            }
         },
         methods:{
             getMessage:function () {
                 axios.get("http://localhost:8089/demo01",{
                     params:{
                         pageNum:valueObj.pageInfo.pageNum,
-                        pageSize: valueObj.pageInfo.pageSize
+                        pageSize: valueObj.pageInfo.pageSize,
+                        lastName:valueObj.formInline.lastName
                     }
                 }).then(function (resp) {
                     console.log(resp);
@@ -207,10 +227,6 @@
         text-align: center;
         line-height: 200px;
     }
-
-
-
-
 
 
 </style>

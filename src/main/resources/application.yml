@@ -13,9 +13,15 @@ mybatis:
 
 
 # PageHelper 分页插件配置
-pagehelper:
-  helper-dialect: mysql
-  reasonable: true
-  support-methods-arguments: true
-  params: count=countsql
+#pagehelper:
+#  helper-dialect: mysql
+#  reasonable: true
+#  support-methods-arguments: true
+#  params: count=countsql
+
+logging:
+#  config: classpath:logback.xml
+  level:
+    com.jjh.mapper: debug
+    sql: debug
 

@@ -12,6 +12,6 @@ import java.util.Map;
  */
 public interface TestService {
 
-    public PageInfo<Map<String,Object>> getMessage(Integer pageNum, Integer pageSize);
+    public PageInfo<Map<String,Object>> getMessage(Integer pageNum, Integer pageSize,String name);
 
 }

@@ -12,5 +12,9 @@
             emp.job_id jobId
         FROM
             employees emp
+        where 1=1
+        <if test="name != null and name !='' ">
+        and emp.last_name like '%${name}%'
+        </if>
     </select>
 </mapper>
