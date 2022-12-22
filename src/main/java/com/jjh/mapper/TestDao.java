@@ -3,6 +3,7 @@ package com.jjh.mapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -16,4 +17,7 @@ public interface TestDao {
 
     @SuppressWarnings("MybatisXMapperMethodInspection")
     List<Map<String,Object>> getAll(String name);
+
+    @SuppressWarnings("MybatisXMapperMethodInspection")
+    Integer updateMessage(HashMap<String,Object> map);
 }

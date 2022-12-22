@@ -17,4 +17,16 @@
         and emp.last_name like '%${name}%'
         </if>
     </select>
+
+    <update id="updateMessage" parameterType="map">
+        update employees emp set emp.email = #{email}
+        <if test="hireDate != null">
+            ,emp.hire_date = #{hireDate}
+        </if>
+        <if test="salary != null and salary != ''">
+            ,emp.salary = #{salary}
+        </if>
+        where emp.last_name = #{lastName}
+    </update>
+
 </mapper>

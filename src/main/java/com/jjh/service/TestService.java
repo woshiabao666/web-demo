@@ -2,6 +2,7 @@ package com.jjh.service;
 
 import com.github.pagehelper.PageInfo;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,5 +14,7 @@ import java.util.Map;
 public interface TestService {
 
     public PageInfo<Map<String,Object>> getMessage(Integer pageNum, Integer pageSize,String name);
+
+    public Integer updateMessage(HashMap<String,Object> updateParam);
 
 }

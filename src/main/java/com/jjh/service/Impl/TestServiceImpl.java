@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -39,8 +40,12 @@ public class TestServiceImpl implements TestService {
         Person person = new Person();
         person.setData(result);
         PageInfo<Map<String,Object>> pageInfo = new PageInfo<>(result);
-
-
         return pageInfo;
+    }
+
+    @Override
+    public Integer updateMessage(HashMap<String, Object> updateParam) {
+        Integer result = testDao.updateMessage(updateParam);
+        return result;
     }
 }
